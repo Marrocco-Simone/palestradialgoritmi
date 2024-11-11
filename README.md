@@ -1,6 +1,6 @@
 # Palestra di Algoritmi
 
-![Logo OII](https://training.olinfo.it/custom_images/logo.png)
+![Logo OII](https://www.olimpiadi-informatica.it/processed_images/oii.75a5f3be7fd52785.png)
 
 ### Introduzione
 
