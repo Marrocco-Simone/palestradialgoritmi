@@ -4,6 +4,12 @@ Le slides sono scritte usando [Marp](https://marp.app), che permette di crearle 
 
 Per compilarle, usate [l'estensione per VSCode](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
 
+Da terminale si può andare con il [CLI](https://github.com/marp-team/marp-cli) (richiede NPM). Si può lanciare con
+
+```bash
+npx @marp-team/marp-cli@latest 0.model.md --pdf
+```
+
 # Argomenti
 
 Gli argomenti che affronteremo sono:
