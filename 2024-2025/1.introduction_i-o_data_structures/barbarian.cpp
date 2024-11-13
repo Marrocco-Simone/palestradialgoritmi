@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -16,13 +17,22 @@ int main()
     int N;
     cin >> N;
 
-    vector<int> D(N);
+    // vector<int> D(N); // il programma fornito non va bene! overflow di int
+    vector<long long> D(N);
     for (int i = 0; i < N; ++i)
         cin >> D[i];
 
+    // int infinito = INT_MAX; // il programma fornito non va bene! overflow di int
+    long long infinito = LLONG_MAX;
+
+    // controlla il vettore sia davvero ordinato. se non lo e', vuol dire alcuni valori vanno in overflow
     for (int i = 1; i < N; ++i)
+    {
         if (D[i - 1] > D[i])
-            throw invalid_argument("overflow");
+            throw invalid_argument("overflow of input");
+        if (D[i] > infinito)
+            throw invalid_argument("infinito troppo piccolo");
+    }
 
     vector<int> ultima(N);
 
@@ -44,18 +54,16 @@ int main()
             while (dopo < N && distrutta[dopo])
                 dopo++;
 
-            int distanza_prima = -1;
+            // int distanza_prima = infinito;
+            long long distanza_prima = infinito;
             if (prima >= 0)
                 distanza_prima = D[attuale] - D[prima];
-            int distanza_dopo = -1;
+            // int distanza_dopo = infinito;
+            long long distanza_dopo = infinito;
             if (dopo < N)
                 distanza_dopo = D[dopo] - D[attuale];
 
-            if (distanza_prima < 0)
-                attuale = dopo;
-            else if (distanza_dopo < 0)
-                attuale = prima;
-            else if (distanza_prima <= distanza_dopo)
+            if (distanza_prima <= distanza_dopo)
                 attuale = prima;
             else
                 attuale = dopo;
