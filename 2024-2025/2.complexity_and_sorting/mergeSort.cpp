@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define FOR(i, N) for (int i = 0; i < N; i++)
 using namespace std;
 
 void merge(int arr[], int i, int m, int f)
@@ -8,9 +9,9 @@ void merge(int arr[], int i, int m, int f)
 
     int L[n1], R[n2];
 
-    for (int x = 0; x < n1; x++)
+    FOR(x, n1)
         L[x] = arr[i + x];
-    for (int y = 0; y < n2; y++)
+    FOR(y, n2)
         R[y] = arr[m + 1 + y];
 
     int x = 0, y = 0, z = i;
