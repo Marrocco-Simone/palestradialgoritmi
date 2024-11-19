@@ -7,7 +7,7 @@ Per compilarle, usate [l'estensione per VSCode](https://marketplace.visualstudio
 Da terminale si può andare con il [CLI](https://github.com/marp-team/marp-cli) (richiede NPM). Si può lanciare con
 
 ```bash
-npx @marp-team/marp-cli@latest 0.model.md --pdf
+npx @marp-team/marp-cli@latest 0.model.md --pdf --allow-local-files
 ```
 
 # Argomenti
