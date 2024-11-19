@@ -7,7 +7,7 @@ typedef std::chrono::high_resolution_clock::time_point tempo;
 #define prendi_tempo() std::chrono::high_resolution_clock::now()
 #define differenza_tempo(start, end) std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() * 1e-3
 
-#define MAXN 1000000000
+#define MAXN 10000000
 #define FOR(i, n) for (int i = 0; i < n; i++)
 
 using namespace std;
@@ -43,39 +43,39 @@ void ordina()
 
 int main()
 {
-  N = 100000000;
+  N = 1000000;
   if (N > MAXN)
   {
-    cout << "N troppo grande\n\n";
+    cout << "N troppo grande\n";
     return 1;
   }
   else
   {
-    cout << "N = 10^" << log10(N) << "\n\n";
+    cout << "N = 10^" << log10(N) << "\n";
   }
   tempo before = prendi_tempo();
 
   crea_numeri_casuali();
   tempo start = prendi_tempo();
-  cout << "Numeri generati in " << differenza_tempo(before, start) << " secondi\n\n";
+  cout << "Numeri generati in " << differenza_tempo(before, start) << " secondi\n";
 
   // modifica questa funzione
   ordina();
   tempo end = prendi_tempo();
-  cout << "Array ordinato in " << differenza_tempo(start, end) << " secondi\n\n";
+  cout << "Array ordinato in " << differenza_tempo(start, end) << " secondi\n";
 
   bool ordinato = controlla_ordinamento();
   tempo after = prendi_tempo();
-  cout << "Controllo ordinamento in " << differenza_tempo(end, after) << " secondi\n\n";
+  cout << "Controllo ordinamento in " << differenza_tempo(end, after) << " secondi\n";
 
-  cout << "Tempo totale: " << differenza_tempo(before, after) << " secondi\n\n";
+  cout << "Tempo totale: " << differenza_tempo(before, after) << " secondi\n";
 
   if (!ordinato)
   {
-    cout << "Array non ordinato\n\n";
+    cout << "Array non ordinato\n";
   }
   else
   {
-    cout << "Array ordinato\n\n";
+    cout << "Array ordinato\n";
   }
 }
