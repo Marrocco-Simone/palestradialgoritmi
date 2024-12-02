@@ -62,7 +62,7 @@ Immaginiamo di ripercorre il percorso da ciascun impiegato `i` al capo. Questo v
 
 ---
 
-![height:500px](3.greedy/images/organigramma.png)
+![height:500px](3.greedy/images/balzi.png)
 
 ---
 
