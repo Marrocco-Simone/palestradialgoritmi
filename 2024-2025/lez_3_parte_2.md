@@ -44,8 +44,7 @@ Possiamo fare meglio?
 
 ### Idea Greedy
 
-Essendo una struttura gerarchica, se usassimo un albero?
-
+Essendo una struttura gerarchica, se usassimo un albero?\n
 Il nodo radice rappresenta il capo e ogni figlio il rispettivo sottoposto
 Quante coppie sono possibili in questo scenario?
 
