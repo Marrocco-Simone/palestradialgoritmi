@@ -1,27 +1,22 @@
-void dfs(int node, const vector<vector<int>> &tree, vector<int> &subordinates) {
-    for (int child : tree[node]) {
-        dfs(child, tree, subordinates);
-        subordinates[node] += subordinates[child] + 1;
-    }
-}
+int coppie(int N, int *C)
+{
 
-int coppie(int N, int *C) {
-    vector<vector<int>> tree(N);
-    int root = -1;
+    int res = 0;
+    int step = 0;
+    for (int i = 0; i < N; i++)
+    {
 
-    for (int i = 0; i < N; i++) {
-        if (C[i] == -1) {
-            root = i;
-        } else {
-            tree[C[i]].push_back(i);
+        int j = i;
+        while (C[j] != -1 && j < N)
+        {
+            step++;
+            j = C[j];
         }
+        if (C[j] == -1)
+        {
+            res += step;
+        }
+        step = 0;
     }
-    vector<int> subordinates(N, 0);
-    dfs(root, tree, subordinates);
-    
-    int result = 0;
-    for (int i = 0; i < N; i++) {
-        result += subordinates[i];
-    }
-    return result;
+    return res;
 }
