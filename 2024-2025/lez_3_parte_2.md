@@ -49,4 +49,4 @@ Essendo una struttura gerarchica, se usassimo un albero?
 Il nodo radice rappresenta il capo e ogni figlio il rispettivo sottoposto
 Quante coppie sono possibili in questo scenario?
 
-![albg]()
+![albg](./3.greedy/images/Screenshot 2024-12-02 200635.png)
