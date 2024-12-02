@@ -1,86 +1,45 @@
 #include <bits/stdc++.h>
-#define MAXD 1000000
-
 using namespace std;
 
-int myFun_neg(vector<int>& P, unsigned long long difference){
-	//sum_prod < NK
-	sort(P.begin(), P.end());
-	int conuter_num_changed = 0;
+#define MAXD 1000000*1ULL
+typedef unsigned long long ull;
 
-	for (int i = 0; i < P.size() && difference > 0; ++i) {
-		unsigned long long addizionale = (MAXD - P[i])*1ULL;
-        unsigned long long increment = min(difference, addizionale)*1ULL;
-        P[i] = min((int)(P[i] + increment), MAXD);
-        difference -= increment;
-        ++conuter_num_changed;
+int average(vector<ull>& P, ull sum_prod, ull NK){//O(n * logn)
+    if(sum_prod<NK) return 1;//why only "1" every time?
+    else if(sum_prod==NK) return 0;//why so?
 
-		/*int addizionale =  MAXD - P[i];
-		unsigned long long increment = (difference >= addizionale ? (unsigned long long) addizionale : difference);
-        if (P[i] <= difference) {//tipo: ... 3 ... e diff=3mil
-			//ex: P[i]=1mil-1 and diff=1mil --> addiz=1; ok
-			P[i] += increment;//Pi = Pi+1mil-Pi iif incr==addiz; ok
-			difference-=increment;//diff=diff-1; ok
+    sort(P.rbegin(), P.rend());//decrescente, complexity?, why sorting?
+    ull difference=sum_prod-NK;//what to use it for?
+    int counter_num_changed = 0;
 
-			//ex: P[i]=1 and diff=1mil --> addiz=999k; ok
-			//incr==addiz --> Pi=1+999k; ok
-			//diff=999k-999k; ok
-        } else {//tipo: ...1mil ... e diff=1, e addiz=0
-            P[i] += increment;
-            difference = 0;
-        }
-        ++conuter_num_changed;*/
-    }
-    return conuter_num_changed;
-}
-
-int myFun(vector<int>& P, unsigned long long difference) {
-    //sum_prod > NK
-    sort(P.rbegin(), P.rend());//decrescente
-	int conuter_num_changed = 0;
-
-	for (int i = 0; i < P.size() && difference > 0; ++i) {
-		unsigned long long less_then_Pi = (P[i]-1)*1ULL;
-        unsigned long long decrement = min(difference, less_then_Pi)*1ULL;
-        P[i] = max((int)(P[i] - decrement), 1);
+	for (int i = 0; i < P.size() && difference > 0; ++i){//O(n)
+		ull less_then_Pi = (P[i]-1);
+        ull decrement = min(difference, less_then_Pi);
+        P[i] = max((P[i] - decrement), 1ULL);//explain why and what is it usefull for
         difference -= decrement;
-        ++conuter_num_changed;
-
-        /*if (P[i] <= difference) {
-            difference -= P[i] - 1;//reduce up to 1
-            P[i] = 1;
-        } else {
-            P[i] -= difference;
-            difference = 0;
-        }
-        ++conuter_num_changed;*/
+        ++counter_num_changed;
     }
-    return conuter_num_changed;
+    return counter_num_changed;
 }
 
 int main() {
 	ifstream cin("input.txt");
     ofstream cout("output.txt");
 
-    int N, K;
-	unsigned long long sum_prod=0;
+    ull sum_prod=0, N, K;// !!!
+    //I sincerely DON'T have idea why N,K have to be ULL, else many cases'll be wrong
+    //perphaps bc smtg regarding casting from int to ULL
+    //... idk and ... tbh idc
 
     cin >> N >> K;
-    vector<int> P(N);
+    vector<ull> P(N);
     for (int i = 0; i < N; ++i){
         cin >> P[i];
 		sum_prod+=P[i];
 	}
 
-    sum_prod*=1ULL;
-	unsigned long long NK= 1ULL*N*K;// !!! 1ULL !!!
-	
-	if(sum_prod<NK){
-		cout << myFun_neg(P, (NK-sum_prod)*1ULL);
-	} else if(sum_prod==NK){
-		cout << 0;
-	} else{
-		cout << myFun(P, (sum_prod-NK)*1ULL);
-	}
+	ull NK= N*K;
+
+    cout << average(P, sum_prod, NK);
 	return 0;
 }
