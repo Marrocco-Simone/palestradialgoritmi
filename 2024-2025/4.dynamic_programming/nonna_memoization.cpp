@@ -5,6 +5,7 @@ using namespace std;
 #define MAXP 1000000
 
 int N, K;
+int memo[MAXN][MAXN];
 int P[MAXN];
 
 int D(int i, int k)
@@ -15,10 +16,14 @@ int D(int i, int k)
   if (i >= N)
     return MAXP * 2;
 
-  int non_prendo = D(i + 1, k);
-  int prendo = D(i + 1, k - P[i]) + P[i];
+  if (!memo[i][k])
+  {
+    int non_prendo = D(i + 1, k);
+    int prendo = D(i + 1, k - P[i]) + P[i];
 
-  return min(prendo, non_prendo);
+    memo[i][k] = min(prendo, non_prendo);
+  }
+  return memo[i][k];
 }
 
 int main()

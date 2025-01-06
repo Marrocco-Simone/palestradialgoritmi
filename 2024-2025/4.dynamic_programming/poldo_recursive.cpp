@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
-const int MAXN = 10001;
+const int MAXN = 10004;
 using namespace std;
 int N;
-int memo[MAXN][MAXN];
 int vini[MAXN];
 
 int D(int i, int last)
@@ -10,24 +9,13 @@ int D(int i, int last)
   if (i >= N)
     return 0;
 
-  if (!memo[i][last])
-  {
-    int non_prendo = D(i + 1, last);
+  int non_prendo = D(i + 1, last);
 
-    if (vini[i] >= last)
-    {
-      memo[i][last] = non_prendo;
-      return non_prendo;
-    }
-    else
-    {
-      int prendo = D(i + 1, vini[i]) + 1;
-      memo[i][last] = max(prendo, non_prendo);
-      return max(prendo, non_prendo);
-    }
-  }
+  if (vini[i] >= last)
+    return non_prendo;
 
-  return memo[i][last];
+  int prendo = D(i + 1, vini[i]) + 1;
+  return max(prendo, non_prendo);
 }
 
 int main()
