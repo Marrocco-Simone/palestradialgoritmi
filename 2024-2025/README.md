@@ -10,6 +10,12 @@ Da terminale si può andare con il [CLI](https://github.com/marp-team/marp-cli) 
 npx @marp-team/marp-cli@latest 0.model.md --pdf --allow-local-files
 ```
 
+> Assicurarsi di avere installato Chrome, perché Firefox non va. In caso si avesse installato solamente Chromium, esportate questa variabile (o equivalente per il vostro sistema operativo)
+
+> ```bash
+> export CHROME_PATH="/Applications/Chromium.app/Contents/MacOS/Chromium"
+> ```
+
 # Argomenti
 
 Gli argomenti che affronteremo sono:
