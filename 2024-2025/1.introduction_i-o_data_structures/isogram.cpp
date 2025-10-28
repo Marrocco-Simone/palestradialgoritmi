@@ -13,7 +13,7 @@ int main()
 {
     // uncomment the following lines if you want to read/write from files
     ifstream cin("input.txt");
-    // ofstream cout("output.txt");
+    ofstream cout("output.txt");
 
     cin >> K;
     cin.ignore();
@@ -29,6 +29,7 @@ int main()
         }
 
         getline(cin, S);
+        bool e_quasi_isogramma = true;
 
         // Conta la frequenza di ogni carattere
         for (int i = 0; i < S.size(); i++)
@@ -37,21 +38,14 @@ int main()
             if (c >= 'a' && c <= 'z')
             {
                 frequenza[c - 'a']++;
+                if (frequenza[c - 'a'] == 3)
+                    e_quasi_isogramma = false;
             }
             else if (c >= 'A' && c <= 'Z')
             {
                 frequenza[c - 'A']++;
-            }
-        }
-
-        // Controlla se e' un quasi-isogramma
-        bool e_quasi_isogramma = true;
-        for (int i = 0; i < 26; i++)
-        {
-            if (frequenza[i] > 2)
-            {
-                e_quasi_isogramma = false;
-                break;
+                if (frequenza[c - 'A'] == 3)
+                    e_quasi_isogramma = false;
             }
         }
 
