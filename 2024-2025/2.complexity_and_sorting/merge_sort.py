@@ -24,54 +24,35 @@ def controlla_ordinamento():
             return False
     return True
 
-def merge(arr, i, m, f):
-    n1 = m - i + 1
-    n2 = f - m
-
-    L = [0] * n1
-    R = [0] * n2
-
-    for x in range(n1):
-        L[x] = arr[i + x]
-    for y in range(n2):
-        R[y] = arr[m + 1 + y]
-
-    x = 0
-    y = 0
-    z = i
-
-    while x < n1 and y < n2:
-        if L[x] <= R[y]:
-            arr[z] = L[x]
-            x += 1
+def unisci_ordinati(A, B): # A e B sono gia' ordinati
+    C = []
+    index_a = 0
+    index_b = 0
+    while (len(C) < len(A) + len(B)):
+        if (
+            index_b >= len(B) or # B è finito, quindi aggiungo solo da A
+            (index_a < len(A) and A[index_a] < B[index_b])# A non è finito ed ha l'elemento piu' piccolo
+        ):
+            C.append(A[index_a])
+            index_a += 1
         else:
-            arr[z] = R[y]
-            y += 1
-        z += 1
+            C.append(B[index_b])
+            index_b += 1
+    return C
 
-    while x < n1:
-        arr[z] = L[x]
-        x += 1
-        z += 1
-
-    while y < n2:
-        arr[z] = R[y]
-        y += 1
-        z += 1
-
-def mergeSort(arr, i, f):
-    if i < f:
-        m = i + (f - i) // 2
-
-        mergeSort(arr, i, m)
-        mergeSort(arr, m + 1, f)
-
-        merge(arr, i, m, f)
+def dividi_e_riunisci_ordinato(C):
+    if len(C) == 1: return C
+    lunghezza = len(C)//2 # divisione intera
+    A = C[:lunghezza] # prima meta'
+    B = C[lunghezza:] # seconda meta'
+    A = dividi_e_riunisci_ordinato(A)
+    B = dividi_e_riunisci_ordinato(B)
+    C = unisci_ordinati(A, B)
+    return C
 
 def ordina():
-    # implementa qui l'algoritmo di ordinamento
-    # D.sort()
-    mergeSort(D, 0, N - 1)
+    global N, D
+    D = dividi_e_riunisci_ordinato(D)
 
 def main():
     global N, D
