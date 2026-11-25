@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include <vector>
 
 using namespace std;
@@ -11,7 +10,7 @@ long long f(long long N, int div, long long init)
     return init;
   if (N % 2 == 0)
     return f(N / 2, div + 1, init);
-  return f(N / 2, div + 1, init + pow(2, div));
+  return f(N / 2, div + 1, init + (1LL << div));
 }
 
 int main()
