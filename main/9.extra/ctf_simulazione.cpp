@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <vector>
 using namespace std;
 
 int main()
@@ -10,16 +10,20 @@ int main()
   {
     long long N;
     cin >> N;
-    queue<long long> cerchio;
-    for (long long i = 1; i <= N; i++)
-      cerchio.push(i);
-    while (cerchio.size() > 1)
+    vector<bool> inGara(N, true);
+    long long rimasti = N;
+    long long i = 0;
+    while (rimasti > 1)
     {
-      long long ladro = cerchio.front();
-      cerchio.pop();
-      cerchio.pop();
-      cerchio.push(ladro);
+      long long j = (i + 1) % N;
+      while (!inGara[j])
+        j = (j + 1) % N;
+      inGara[j] = false;
+      rimasti--;
+      i = (j + 1) % N;
+      while (!inGara[i])
+        i = (i + 1) % N;
     }
-    cout << cerchio.front() << "\n";
+    cout << i + 1 << "\n";
   }
 }
